@@ -1,11 +1,15 @@
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 from homeassistant.const import (
-    DEVICE_CLASS_GAS,
-    VOLUME_CUBIC_METERS,
-    ELECTRIC_POTENTIAL_VOLT,
     STATE_UNKNOWN
 )
+from homeassistant.components.sensor import SensorDeviceClass
+from homeassistant.const import UnitOfVolume,UnitOfElectricPotential
 from .const import DOMAIN
+
+# import debugpy
+# debugpy.listen(("0.0.0.0", 5678))
+# debugpy.wait_for_client()
+# debugpy.breakpoint()
 
 GAS_SENSORS = {
     "balance": {
@@ -25,27 +29,27 @@ GAS_SENSORS = {
     },
     "current_level_remain": {
         "name": "当前阶梯剩余额度",
-        "device_class": DEVICE_CLASS_GAS,
-        "unit_of_measurement": VOLUME_CUBIC_METERS
+        "device_class": SensorDeviceClass.GAS,
+        "unit_of_measurement": UnitOfVolume.CUBIC_METERS
     },
     "year_consume": {
         "name": "本年度用气量",
-        "device_class": DEVICE_CLASS_GAS,
-        "unit_of_measurement": VOLUME_CUBIC_METERS
+        "device_class": SensorDeviceClass.GAS,
+        "unit_of_measurement": UnitOfVolume.CUBIC_METERS
     },
     "month_reg_qty": {
         "name": "当月用气量",
-        "device_class": DEVICE_CLASS_GAS,
-        "unit_of_measurement": VOLUME_CUBIC_METERS
+        "device_class": SensorDeviceClass.GAS,
+        "unit_of_measurement": UnitOfVolume.CUBIC_METERS
     },
     "battery_voltage": {
         "name": "气表电量",
-        "device_class": DEVICE_CLASS_GAS,
-        "unit_of_measurement": ELECTRIC_POTENTIAL_VOLT
+        "device_class": SensorDeviceClass.GAS,
+        "unit_of_measurement": UnitOfElectricPotential.VOLT
     },
     "mtr_status": {
         "name": "阀门状态",
-        "device_class": DEVICE_CLASS_GAS,
+        "device_class": SensorDeviceClass.GAS,
         "unit_of_measurement": ""
     }
 }
@@ -165,11 +169,11 @@ class GASHistorySensor(GASBaseSensor):
 
     @property
     def device_class(self):
-        return DEVICE_CLASS_GAS
+        return SensorDeviceClass.GAS
 
     @property
     def unit_of_measurement(self):
-        return VOLUME_CUBIC_METERS
+        return UnitOfVolume.CUBIC_METERS
 
 
 class GASDailyBillSensor(GASBaseSensor):
@@ -197,8 +201,8 @@ class GASDailyBillSensor(GASBaseSensor):
 
     @property
     def device_class(self):
-        return DEVICE_CLASS_GAS
+        return SensorDeviceClass.GAS
 
     @property
     def unit_of_measurement(self):
-        return VOLUME_CUBIC_METERS
+        return UnitOfVolume.CUBIC_METERS

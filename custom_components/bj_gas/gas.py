@@ -106,12 +106,11 @@ class GASData:
 
     async def async_get_data(self):
         self._info = {self._user_code: {}}
-        tasks = [
-            self.async_get_userinfo(self._user_code),
-            self.async_get_week(self._user_code),
-            self.async_get_year(self._user_code),
-            self.async_get_step(self._user_code)
-        ]
-        await asyncio.wait(tasks)
+        await asyncio.gather(
+                self.async_get_userinfo(self._user_code),
+                self.async_get_week(self._user_code),
+                self.async_get_year(self._user_code),
+                self.async_get_step(self._user_code)
+            )
         _LOGGER.debug(f"Data {self._info}")
         return self._info
